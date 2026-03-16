@@ -1,0 +1,111 @@
+// ...existing code...
+/**
+ * Representa un empleado de la empresa.
+ * <p>
+ * Contiene nombre, puesto (tipo {@link Cargo}) y salario. El constructor aplica
+ * validaciones básicas: nombre no nulo/no vacío y con al menos dos palabras,
+ * puesto no nulo y salario no negativo ni por debajo del convenio ({@link Constantes#SALARIO_CONVENIO}).
+ * </p>
+ */
+public class Empleado {
+    private String nombre;
+    private Cargo puesto;
+    private double salario;
+
+    /**
+     * Construye un nuevo empleado validando los parámetros.
+     *
+     * @param nombre nombre completo (debe contener al menos nombre y apellido)
+     * @param puesto cargo del empleado; no puede ser {@code null}
+     * @param salario salario anual; debe ser >= {@link Constantes#SALARIO_CONVENIO}
+     * @throws IllegalArgumentException si alguna validación falla
+     */
+    public Empleado(String nombre, Cargo puesto, double salario) {
+        validateNombre(nombre);
+        validatePuesto(puesto);
+        validateSalario(salario);
+
+        this.nombre = nombre.trim();
+        this.puesto = puesto;
+        this.salario = salario;
+    }
+
+    private void validateNombre(String nombre) {
+        if (nombre == null) throw new IllegalArgumentException("Nombre no puede ser nulo");
+        String trimmed = nombre.trim();
+        if (trimmed.isEmpty()) throw new IllegalArgumentException("Nombre no puede estar vacío");
+        // al menos dos palabras
+        String[] parts = trimmed.split("\\s+");
+        if (parts.length < 2) throw new IllegalArgumentException("Nombre debe contener al menos nombre y apellido");
+    }
+
+    private void validatePuesto(Cargo puesto) {
+        if (puesto == null) throw new IllegalArgumentException("Cargo no puede ser nulo");
+    }
+
+    private void validateSalario(double salario) {
+        if (salario < 0) throw new IllegalArgumentException("Salario no puede ser negativo");
+        if (salario < Constantes.SALARIO_CONVENIO) throw new IllegalArgumentException("Salario por debajo del convenio");
+    }
+
+    /**
+     * Obtiene el nombre completo del empleado.
+     *
+     * @return nombre completo
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Establece el nombre del empleado. No realiza validaciones adicionales;
+     * para comprobaciones use el constructor o métodos de validación.
+     *
+     * @param nombre nuevo nombre
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Obtiene el cargo del empleado.
+     *
+     * @return cargo (enum {@link Cargo})
+     */
+    public Cargo getPuesto() {
+        return puesto;
+    }
+
+    /**
+     * Establece el cargo del empleado.
+     *
+     * @param puesto nuevo cargo
+     */
+    public void setPuesto(Cargo puesto) {
+        this.puesto = puesto;
+    }
+
+    /**
+     * Obtiene el salario anual del empleado.
+     *
+     * @return salario anual
+     */
+    public double getSalario() {
+        return salario;
+    }
+
+    /**
+     * Establece el salario anual del empleado.
+     *
+     * @param salario nuevo salario
+     */
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + Constantes.SEPARADOR + (puesto != null ? puesto.toString() : "") + Constantes.SEPARADOR + salario;
+    }
+}
+// ...existing code...
