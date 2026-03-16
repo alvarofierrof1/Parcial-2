@@ -5,7 +5,7 @@
 Pequeña aplicación Java para gestionar empleados: definición de empleados, lista de cargos (enum), gestión de una colección de empleados (alta, listado, aumento salarial) y validaciones básicas.
 
 ## Autoría y versión
-- Autor: (rellena tu nombre aquí)
+- Autor: (Alvaro Fierro Freije)
 - Versión: 1.0.0
 
 ## Estructura del proyecto
